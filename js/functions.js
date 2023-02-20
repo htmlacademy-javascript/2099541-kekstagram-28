@@ -21,6 +21,12 @@ const getNumber = (string) => {
   return numb;
 };
 
+const getNewString = (string, minLength, symbols) => {
+  let newString = string.padStart(minLength, symbols)
+  return newString;
+}
+
 getStringLength();
 getMatchPalindrome();
 getNumber();
+getNewString();
