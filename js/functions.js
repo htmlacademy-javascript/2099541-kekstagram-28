@@ -16,13 +16,13 @@ const getMatchPalindrome = (palindrome) => {
 };
 
 const getNumber = (string) => {
-  let numb = string.match(/\d/g);
+  const numb = string.match(/\d/g);
   numb = numb.join('');
   return numb;
 };
 
 const getNewString = (string, minLength, symbols) => {
-  let newString = string.padStart(minLength, symbols)
+  const newString = string.padStart(minLength, symbols);
   return newString;
 }
 
