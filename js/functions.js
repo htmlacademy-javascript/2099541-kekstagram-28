@@ -16,7 +16,7 @@ const getMatchPalindrome = (palindrome) => {
 };
 
 const getNumber = (string) => {
-  const numb = string.match(/\d/g);
+  let numb = string.match(/\d/g);
   numb = numb.join('');
   return numb;
 };
@@ -24,7 +24,7 @@ const getNumber = (string) => {
 const getNewString = (string, minLength, symbols) => {
   const newString = string.padStart(minLength, symbols);
   return newString;
-}
+};
 
 getStringLength();
 getMatchPalindrome();
