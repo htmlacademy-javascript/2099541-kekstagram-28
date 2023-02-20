@@ -1,17 +1,10 @@
-const getStringLength = (string, length) => {
-  if (string.length <= length) {
-    return true;
-  }
-  return false;
-};
+const getStringLength = (string, length) => string.length <= length;
 
 const getMatchPalindrome = (palindrome) => {
-  const half = Math.floor(palindrome.length / 2);
+  const tempString = palindrome.toLowerCase().replaceAll(' ', '');
+  const half = Math.floor(tempString.length / 2);
   for (let i = 0; i < half; i++) {
-    if (palindrome[i] !== palindrome[palindrome.length - i - 1]) {
-      return false;
-    }
-    return true;
+    return tempString[i] === tempString[tempString.length - i - 1];
   }
 };
 
