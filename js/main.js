@@ -31,7 +31,7 @@ const generateCommentsId = createRandomUniqId(1, 5000);
 
 function urlIndex() {
   return `photos/${generateUrl()}.jpg`;
-};
+}
 
 function avatarIndex() {
   return `img/avatar-${getRandomInteger(1, 6)}.svg`;
