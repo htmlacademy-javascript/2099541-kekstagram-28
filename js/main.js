@@ -77,13 +77,9 @@ const generateId = createRandomUniqId(1, 25);
 const generateUrl = createRandomUniqId(1, 25);
 const generateCommentsId = createRandomUniqId(1, 5000);
 
-const urlIndex = () => {
-  return `photos/${generateUrl()}.jpg`;
-};
+const urlIndex = () => `photos/${generateUrl()}.jpg`;
 
-const avatarIndex = () => {
-  return `img/avatar-${getRandomInteger(1, 6)}.svg`;
-};
+const avatarIndex = () => `img/avatar-${getRandomInteger(1, 6)}.svg`;
 
 const createMessage = (array) => {
   let newMessage = getRandomInteger(0, array.length - 1);
@@ -109,7 +105,7 @@ const createObject = () => ({
     avatar: avatarIndex(),
     message: createMessage(finalArrMessage),
     name: showArrayRand(NAMES),
-    },
+  },
 });
 
 const createSimilarObjects = () =>

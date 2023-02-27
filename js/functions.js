@@ -51,3 +51,5 @@ getStringLength();
 getMatchPalindrome();
 getNumber();
 getNewString();
+createRandomUniqId();
+showArrayRand();
