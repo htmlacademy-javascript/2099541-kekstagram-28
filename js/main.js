@@ -1,8 +1,56 @@
-import {
-  getRandomInteger,
-  createRandomUniqId,
-  showArrayRand,
-} from './functions.js';
+const getStringLength = (string, length) => string.length <= length;
+
+const getMatchPalindrome = (palindrome) => {
+  const tempString = palindrome.toLowerCase().replaceAll(' ', '');
+  const half = Math.floor(tempString.length / 2);
+  for (let i = 0; i < half; i++) {
+    return tempString[i] === tempString[tempString.length - i - 1];
+  }
+};
+
+const getNumber = (string) => {
+  let numb = string.match(/\d/g);
+  numb = numb.join('');
+  return numb;
+};
+
+const getNewString = (string, minLength, symbols) => {
+  const newString = string.padStart(minLength, symbols);
+  return newString;
+};
+
+const getRandomInteger = (min, max) => {
+  const lower = Math.ceil(Math.min(min, max));
+  const upper = Math.floor(Math.max(min, max));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
+};
+
+const createRandomUniqId = (min, max) => {
+  const previousValues = [];
+
+  return function () {
+    let currentValue = getRandomInteger(min, max);
+    if (previousValues.length >= (max - min + 1)) {
+      return null;
+    }
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(min, max);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
+};
+
+const showArrayRand = (arr) => {
+  const randText = Math.floor(Math.random() * arr.length);
+  return arr[randText];
+};
+
+getStringLength();
+getMatchPalindrome();
+getNumber();
+getNewString();
 
 const NAMES = [
   'Иван',
@@ -29,13 +77,13 @@ const generateId = createRandomUniqId(1, 25);
 const generateUrl = createRandomUniqId(1, 25);
 const generateCommentsId = createRandomUniqId(1, 5000);
 
-function urlIndex() {
+const urlIndex = () => {
   return `photos/${generateUrl()}.jpg`;
-}
+};
 
-function avatarIndex() {
+const avatarIndex = () => {
   return `img/avatar-${getRandomInteger(1, 6)}.svg`;
-}
+};
 
 const createMessage = (array) => {
   let newMessage = getRandomInteger(0, array.length - 1);
@@ -51,21 +99,18 @@ const createMessage = (array) => {
 
 const similarObjectsCount = 25;
 
-const createObject = () => {
-  const profileFoto = {
-    id: generateId(),
-    url: urlIndex(),
-    description: 'оцените фотку!)',
-    likes: getRandomInteger(15, 200),
-    comments: {
-      id: generateCommentsId(),
-      avatar: avatarIndex(),
-      message: createMessage(finalArrMessage),
-      name: showArrayRand(NAMES),
+const createObject = () => ({
+  id: generateId(),
+  url: urlIndex(),
+  description: 'оцените фотку!)',
+  likes: getRandomInteger(15, 200),
+  comments: {
+    id: generateCommentsId(),
+    avatar: avatarIndex(),
+    message: createMessage(finalArrMessage),
+    name: showArrayRand(NAMES),
     },
-  };
-  return profileFoto;
-};
+});
 
 const createSimilarObjects = () =>
   Array.from({ length: similarObjectsCount }, createObject);
