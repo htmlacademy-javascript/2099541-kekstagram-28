@@ -51,5 +51,5 @@ getStringLength();
 getMatchPalindrome();
 getNumber();
 getNewString();
-createRandomUniqId();
-showArrayRand();
+
+export {getRandomInteger, createRandomUniqId, showArrayRand};
