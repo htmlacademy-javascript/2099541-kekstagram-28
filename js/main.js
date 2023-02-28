@@ -1,3 +1,3 @@
-import {createSimilarObjects} from './data';
+import {createSimilarObjects} from './generate-objects';
 
 createSimilarObjects();
