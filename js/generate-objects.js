@@ -1,5 +1,5 @@
-import {NAMES, MESSAGE} from './data';
-import {getRandomInteger, createRandomUniqId, showArrayRand} from './functions';
+import {NAMES, MESSAGE} from './data.js';
+import {getRandomInteger, createRandomUniqId, showArrayRand} from './functions.js';
 
 const arrMessage = MESSAGE.split('! ', 1).join();
 const finalArrMessage = MESSAGE.slice(13).split('. ');
