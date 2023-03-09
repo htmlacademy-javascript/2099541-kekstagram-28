@@ -1,18 +1,15 @@
-import {createSimilarObjects} from './generate-objects.js';
-
 const similarNewMiniatures = document.querySelector('.pictures');
 const similarMiniaturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const newMiniaturesFragment = document.createDocumentFragment();
 
-const similarMiniatures = createSimilarObjects();
+export function generateNewMiniatures(descriptionObjects) {
+  descriptionObjects.forEach((objectsItem) => {
+    const miniatureElement = similarMiniaturesTemplate.cloneNode(true);
+    miniatureElement.querySelector('.picture__img').src = objectsItem.url;
+    miniatureElement.querySelector('.picture__comments').textContent = objectsItem['comments'].length;
+    miniatureElement.querySelector('.picture__likes').textContent = objectsItem.likes;
+    newMiniaturesFragment.append(miniatureElement);
+  });
 
-const NewMiniaturesFragment = document.createDocumentFragment();
-
-similarMiniatures.forEach(({url, likes, comments}) => {
-  const MiniatureElement = similarMiniaturesTemplate.cloneNode(true);
-  MiniatureElement.querySelector('.picture__img').src = url;
-  MiniatureElement.querySelector('.picture__comments').textContent = comments.message.length;
-  MiniatureElement.querySelector('.picture__likes').textContent = likes;
-  NewMiniaturesFragment.append(MiniatureElement);
-});
-
-similarNewMiniatures.append(NewMiniaturesFragment);
+  similarNewMiniatures.append(newMiniaturesFragment);
+}
