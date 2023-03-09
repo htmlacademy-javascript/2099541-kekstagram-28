@@ -1,3 +1,5 @@
-import {createSimilarObjects} from './generate-objects';
+import {createSimilarObjects} from './generate-objects.js';
+import {generateNewMiniatures} from './generate-miniatures.js';
 
-createSimilarObjects();
+const descriptionObjects = createSimilarObjects();
+generateNewMiniatures(descriptionObjects);
