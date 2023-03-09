@@ -1,23 +1,23 @@
-const getStringLength = (string, length) => string.length <= length;
+//const getStringLength = (string, length) => string.length <= length;
 
-const getMatchPalindrome = (palindrome) => {
+/*const getMatchPalindrome = (palindrome) => {
   const tempString = palindrome.toLowerCase().replaceAll(' ', '');
   const half = Math.floor(tempString.length / 2);
   for (let i = 0; i < half; i++) {
     return tempString[i] === tempString[tempString.length - i - 1];
   }
-};
+};*/
 
-const getNumber = (string) => {
+/*const getNumber = (string) => {
   let numb = string.match(/\d/g);
   numb = numb.join('');
   return numb;
-};
+};*/
 
-const getNewString = (string, minLength, symbols) => {
+/*const getNewString = (string, minLength, symbols) => {
   const newString = string.padStart(minLength, symbols);
   return newString;
-};
+};*/
 
 const getRandomInteger = (min, max) => {
   const lower = Math.ceil(Math.min(min, max));
@@ -47,9 +47,9 @@ const showArrayRand = (arr) => {
   return arr[randText];
 };
 
-getStringLength();
-getMatchPalindrome();
-getNumber();
-getNewString();
+//getStringLength();
+//getMatchPalindrome();
+//getNumber();
+//getNewString();
 
 export {getRandomInteger, createRandomUniqId, showArrayRand};

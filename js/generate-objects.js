@@ -32,12 +32,12 @@ const createObject = () => ({
   url: urlIndex(),
   description: 'оцените фотку!)',
   likes: getRandomInteger(15, 200),
-  comments: {
+  comments: [{
     id: generateCommentsId(),
     avatar: avatarIndex(),
     message: createMessage(finalArrMessage),
     name: showArrayRand(NAMES),
-  },
+  }],
 });
 
 const createSimilarObjects = () =>
