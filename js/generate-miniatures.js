@@ -15,4 +15,4 @@ const generateNewMiniatures = (descriptionObjects) => {
   similarNewMiniatures.append(newMiniaturesFragment);
 };
 
-export {generateNewMiniatures};
+export {generateNewMiniatures, similarNewMiniatures};

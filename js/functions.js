@@ -47,12 +47,13 @@ const showArrayRand = (arr) => {
   return arr[randText];
 };
 
-const createSimilarObjects = (number, object) =>
-  Array.from({length: number}, object);
+const createSimilarObjects = (number, object) => Array.from({length: number}, object);
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
 //getStringLength();
 //getMatchPalindrome();
 //getNumber();
 //getNewString();
 
-export {getRandomInteger, createRandomUniqId, showArrayRand, createSimilarObjects};
+export {getRandomInteger, createRandomUniqId, showArrayRand, createSimilarObjects, isEscapeKey};
