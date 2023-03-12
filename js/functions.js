@@ -47,9 +47,12 @@ const showArrayRand = (arr) => {
   return arr[randText];
 };
 
+const createSimilarObjects = (number, object) =>
+  Array.from({length: number}, object);
+
 //getStringLength();
 //getMatchPalindrome();
 //getNumber();
 //getNewString();
 
-export {getRandomInteger, createRandomUniqId, showArrayRand};
+export {getRandomInteger, createRandomUniqId, showArrayRand, createSimilarObjects};
