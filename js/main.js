@@ -6,3 +6,5 @@ import './open-big-picture.js';
 
 const descriptionObjects = createSimilarObjects(similarObjectsCount, createObject);
 generateNewMiniatures(descriptionObjects);
+
+export {descriptionObjects};
