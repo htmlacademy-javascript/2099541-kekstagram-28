@@ -53,6 +53,7 @@ bigPictureOpen.addEventListener('click', (evt) => {
   commentsLoader.classList.add('hidden');
   rollBody.classList.add('modal-open');
 
+  // eslint-disable-next-line no-shadow
   document.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
