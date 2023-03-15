@@ -16,11 +16,11 @@ const newCommentsCount = bigPicturePreview.querySelector('#comments-count');
 bigPictureOpen.addEventListener('click', (evt) => {
   if (evt.target.closest('.picture')) {
     userBigPicture.classList.remove('hidden');
-    const target = evt.target.closest('picture');
-    const currentData = descriptionObjects.find((item) => item.id === 1);
-    console.log(currentData);
+    const target = evt.target.closest('.picture');
+    const currentData = descriptionObjects.find((item) => item.id === Number(target.dataset.id));
+    //console.log(currentData);
     newBigPicture.src = currentData.url;
-    newBigPicture.alt = currentData.alt;
+    newBigPicture.alt = currentData.description;
     newLikesCount.textContent = currentData.likes;
     newCommentsCount.textContent = currentData.comments.length;
   }
