@@ -10,6 +10,7 @@ const generateNewMiniatures = (descriptionObjects) => {
     miniatureElement.querySelector('.picture__comments').textContent = objectsItem.comments.length;
     miniatureElement.querySelector('.picture__likes').textContent = objectsItem.likes;
     miniatureElement.dataset.id = objectsItem.id;
+    miniatureElement.tabindex = 0;
     newMiniaturesFragment.append(miniatureElement);
   });
 

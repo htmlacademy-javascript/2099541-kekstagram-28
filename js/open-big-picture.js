@@ -12,56 +12,67 @@ const rollBody = document.querySelector('body');
 const commentsCount = bigPicturePreview.querySelector('.social__comment-count');
 const commentsLoader = bigPicturePreview.querySelector('.comments-loader');
 const bigPictureClose = bigPicturePreview.querySelector('.big-picture__cancel');
+const commentsList = bigPicturePreview.querySelector('.social__comments');
+const comment = bigPicturePreview.querySelector('.social__comment');
 
+const onDocumentKeydown = (event) => {
+  if (isEscapeKey(event)) {
+    event.preventDefault();
+    userBigPicture.classList.add('hidden');
+    commentsCount.classList.remove('hidden');
+    commentsLoader.classList.remove('hidden');
+    rollBody.classList.remove('modal-open');
+    commentsList.appendChild(comment);
+  }
+};
 
-bigPictureOpen.addEventListener('click', (evt) => {
+const openUserModal = (evt) => {
   if (evt.target.closest('.picture')) {
     userBigPicture.classList.remove('hidden');
+    commentsCount.classList.add('hidden');
+    commentsLoader.classList.add('hidden');
+    rollBody.classList.add('modal-open');
     const target = evt.target.closest('.picture');
     const currentData = descriptionObjects.find((item) => item.id === Number(target.dataset.id));
     newBigPicture.src = currentData.url;
     newBigPicture.alt = currentData.description;
     newLikesCount.textContent = currentData.likes;
     newCommentsCount.textContent = currentData.comments.length;
-    //console.log(currentData.comments);
 
     if (currentData.comments.length > 1) {
-      const generateDataComments = (arrComments) => {
-        const newCommentsDataPersons = bigPicturePreview.querySelectorAll('.social__comment');
-        for (let i = 0; i < newCommentsDataPersons.length; i++) {
-          const newCommentsDataPerson = newCommentsDataPersons[i];
-          newCommentsDataPerson.querySelector('.social__picture').src = arrComments[i].avatar;
-          newCommentsDataPerson.querySelector('.social__picture').alt = arrComments[i].name;
-          newCommentsDataPerson.querySelector('.social__text').textContent = arrComments[i].message;
-        }
-      };
-      generateDataComments(currentData.comments);
+      const newCommentsDataPersons = bigPicturePreview.querySelectorAll('.social__comment');
+      for (let i = 0; i < newCommentsDataPersons.length; i++) {
+        const newCommentsDataPerson = newCommentsDataPersons[i];
+        newCommentsDataPerson.querySelector('.social__picture').src = currentData.comments[i].avatar;
+        newCommentsDataPerson.querySelector('.social__picture').alt = currentData.comments[i].name;
+        newCommentsDataPerson.querySelector('.social__text').textContent = currentData.comments[i].message;
+      }
     } else {
-      const generateDataComments = (arrComments) => {
-        const newCommentsDataPerson = bigPicturePreview.querySelector('.social__comment');
-        newCommentsDataPerson.querySelector('.social__picture').src = arrComments[0].avatar;
-        newCommentsDataPerson.querySelector('.social__picture').alt = arrComments[0].name;
-        newCommentsDataPerson.querySelector('.social__text').textContent = arrComments[0].message;
-        const commentsList = bigPicturePreview.querySelector('.social__comments');
-        commentsList.removeChild(commentsList.children[1]);
-      };
-      generateDataComments(currentData.comments);
+      const newCommentsDataPerson = bigPicturePreview.querySelector('.social__comment');
+      newCommentsDataPerson.querySelector('.social__picture').src = currentData.comments[0].avatar;
+      newCommentsDataPerson.querySelector('.social__picture').alt = currentData.comments[0].name;
+      newCommentsDataPerson.querySelector('.social__text').textContent = currentData.comments[0].message;
+      commentsList.removeChild(commentsList.children[1]);
     }
   }
 
-  commentsCount.classList.add('hidden');
-  commentsLoader.classList.add('hidden');
-  rollBody.classList.add('modal-open');
+  document.addEventListener('keydown', onDocumentKeydown);
+};
 
-  // eslint-disable-next-line no-shadow
-  document.addEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-      userBigPicture.classList.add('hidden');
-    }
-  });
+const closeUserModal = () => {
+  userBigPicture.classList.add('hidden');
+  commentsCount.classList.remove('hidden');
+  commentsLoader.classList.remove('hidden');
+  rollBody.classList.remove('modal-open');
+  commentsList.appendChild(comment);
+
+  document.removeEventListener('keydown', onDocumentKeydown);
+};
+
+bigPictureOpen.addEventListener('click', (evt) => {
+  openUserModal(evt);
 });
 
 bigPictureClose.addEventListener('click', () => {
-  userBigPicture.classList.add('hidden');
+  closeUserModal();
 });
