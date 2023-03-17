@@ -52,7 +52,7 @@ const openUserModal = (evt) => {
       newCommentsDataPerson.querySelector('.social__picture').src = currentData.comments[0].avatar;
       newCommentsDataPerson.querySelector('.social__picture').alt = currentData.comments[0].name;
       newCommentsDataPerson.querySelector('.social__text').textContent = currentData.comments[0].message;
-      commentsList.removeChild(commentsList.children[1]);
+      commentsList.removeChild(comment);
     }
   }
 
