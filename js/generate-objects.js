@@ -1,5 +1,5 @@
 import {NAMES, MESSAGE} from './data.js';
-import {getRandomInteger, createRandomUniqId, showArrayRand} from './functions.js';
+import {getRandomInteger, createRandomUniqId, showArrayRand, createSimilarObjects} from './functions.js';
 
 const arrMessage = MESSAGE.split('! ', 1).join();
 const finalArrMessage = MESSAGE.slice(13).split('. ');
@@ -25,22 +25,19 @@ const createMessage = (array) => {
   return newMessage;
 };
 
-const similarObjectsCount = 25;
+const createComments = () => ({
+  id: generateCommentsId(),
+  avatar: avatarIndex(),
+  message: createMessage(finalArrMessage),
+  name: showArrayRand(NAMES),
+});
 
 const createObject = () => ({
   id: generateId(),
   url: urlIndex(),
   description: 'оцените фотку!)',
   likes: getRandomInteger(15, 200),
-  comments: [{
-    id: generateCommentsId(),
-    avatar: avatarIndex(),
-    message: createMessage(finalArrMessage),
-    name: showArrayRand(NAMES),
-  }],
+  comments: createSimilarObjects(getRandomInteger(1, 2), createComments),
 });
 
-const createSimilarObjects = () =>
-  Array.from({ length: similarObjectsCount }, createObject);
-
-export {createSimilarObjects};
+export {createObject};
