@@ -15,7 +15,7 @@ const bigPictureClose = bigPicturePreview.querySelector('.big-picture__cancel');
 const commentsList = bigPicturePreview.querySelector('.social__comments');
 const comment = bigPicturePreview.querySelector('.social__comment');
 
-const onDocumentKeydown = (event) => {
+const onPictureKeydown = (event) => {
   if (isEscapeKey(event)) {
     event.preventDefault();
     userBigPicture.classList.add('hidden');
@@ -56,17 +56,17 @@ const openUserModal = (evt) => {
     }
   }
 
-  document.addEventListener('keydown', onDocumentKeydown);
+  document.addEventListener('keydown', onPictureKeydown);
 };
 
-const closeUserModal = () => {
+const closeUserPicture = () => {
   userBigPicture.classList.add('hidden');
   commentsCount.classList.remove('hidden');
   commentsLoader.classList.remove('hidden');
   rollBody.classList.remove('modal-open');
   commentsList.appendChild(comment);
 
-  document.removeEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('keydown', onPictureKeydown);
 };
 
 bigPictureOpen.addEventListener('click', (evt) => {
@@ -74,5 +74,7 @@ bigPictureOpen.addEventListener('click', (evt) => {
 });
 
 bigPictureClose.addEventListener('click', () => {
-  closeUserModal();
+  closeUserPicture();
 });
+
+export {rollBody};
