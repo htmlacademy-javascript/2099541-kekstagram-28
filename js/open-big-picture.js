@@ -26,7 +26,7 @@ const onPictureKeydown = (event) => {
   }
 };
 
-const openUserModal = (evt) => {
+const openUserPicture = (evt) => {
   if (evt.target.closest('.picture')) {
     userBigPicture.classList.remove('hidden');
     commentsCount.classList.add('hidden');
@@ -70,7 +70,7 @@ const closeUserPicture = () => {
 };
 
 bigPictureOpen.addEventListener('click', (evt) => {
-  openUserModal(evt);
+  openUserPicture(evt);
 });
 
 bigPictureClose.addEventListener('click', () => {
