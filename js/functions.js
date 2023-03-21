@@ -51,9 +51,11 @@ const createSimilarObjects = (number, object) => Array.from({length: number}, ob
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
+const validateInputLength = (input, number) => input.value.trim().length <= number;
+
 //getStringLength();
 //getMatchPalindrome();
 //getNumber();
 //getNewString();
 
-export {getRandomInteger, createRandomUniqId, showArrayRand, createSimilarObjects, isEscapeKey};
+export {getRandomInteger, createRandomUniqId, showArrayRand, createSimilarObjects, isEscapeKey, validateInputLength};

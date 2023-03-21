@@ -6,6 +6,7 @@ const downloadPicture = similarNewMiniatures.querySelector('#upload-file');
 const openModal = similarNewMiniatures.querySelector('.img-upload__overlay');
 const closeModal = similarNewMiniatures.querySelector('.img-upload__cancel');
 const userModalHashtags = openModal.querySelector('.text__hashtags');
+const userModalComment = openModal.querySelector('.text__description');
 
 const onModalKeydown = (event) => {
   if (isEscapeKey(event)) {
@@ -42,4 +43,4 @@ closeModal.addEventListener('click', () => {
   closeUserModal();
 });
 
-export {userModalHashtags};
+export {userModalHashtags, userModalComment};

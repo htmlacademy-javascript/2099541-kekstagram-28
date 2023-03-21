@@ -1,6 +1,6 @@
-import {userModalHashtags} from './open-user-form.js';
-import {MAXHASHTAGSSYMBOLLENGTH, MAXHASHTAGSARRAYLENGTH} from './data.js';
-import {hashtagRules} from './regexp.js';
+import {userModalHashtags, userModalComment} from './open-user-form.js';
+import {MAXHASHTAGSSYMBOLLENGTH, MAXHASHTAGSARRAYLENGTH, MAXTEXTAREALENGTH} from './data.js';
+import {isValidHashtag} from './regexp.js';
 
 const userModalForm = document.querySelector('.img-upload__form');
 
@@ -13,15 +13,16 @@ const pristine = new Pristine(userModalForm, {
   errorTextClass: 'img-upload__error'
 }, false);
 
+const hashtags = userModalHashtags;
+const userComment = userModalComment;
+
 pristine.addValidator(
   userModalHashtags,
-  hashtagRules,
+  isValidHashtag,
   'хэштэг составлен не по правилам'
 );
 
-const hashtags = userModalHashtags.value.trim();
-
-const validateHashtagsLength = () => hashtags.length > MAXHASHTAGSSYMBOLLENGTH;
+const validateHashtagsLength = () => hashtags.value.trim().length <= MAXHASHTAGSSYMBOLLENGTH;
 
 pristine.addValidator(
   userModalHashtags,
@@ -29,7 +30,15 @@ pristine.addValidator(
   'превышено максимальное количество символов'
 );
 
-const validateHashtagsNumber = () => hashtags.split(' ').length > MAXHASHTAGSARRAYLENGTH;
+const validateCommentLength = () => userComment.value.trim().length <= MAXTEXTAREALENGTH;
+
+pristine.addValidator(
+  userModalComment,
+  validateCommentLength,
+  'превышено максимальное количество символов'
+);
+
+const validateHashtagsNumber = () => hashtags.value.trim().split(' ').length < MAXHASHTAGSARRAYLENGTH;
 
 pristine.addValidator(
   userModalHashtags,
@@ -39,14 +48,14 @@ pristine.addValidator(
 
 const validateSimilarHashtags = () => {
   const values = [];
-  for (let i = 0; i < hashtags.split(' ').length; i++) {
-    const value = hashtags.split(' ')[i];
+  for (let i = 0; i < hashtags.value.trim().split(' ').length; i++) {
+    const value = hashtags.value.trim().split(' ')[i];
     if (values.indexOf(value) !== -1) {
-      return true;
+      return false;
     }
     values.push(value);
   }
-  return false;
+  return true;
 };
 
 pristine.addValidator(
