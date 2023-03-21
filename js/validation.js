@@ -1,9 +1,17 @@
 import {userModalHashtags} from './open-user-form.js';
+import {MAXHASHTAGSSYMBOLLENGTH, MAXHASHTAGSARRAYLENGTH} from './data.js';
 import {hashtagRules} from './regexp.js';
 
 const userModalForm = document.querySelector('.img-upload__form');
 
-const pristine = new Pristine(userModalForm);
+const pristine = new Pristine(userModalForm, {
+  classTo: 'img-upload__field-wrapper',
+  errorClass: 'img-upload__field-wrapper--invalid',
+  successClass: 'img-upload__field-wrapper--valid',
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextTag: 'span',
+  errorTextClass: 'img-upload__error'
+}, false);
 
 pristine.addValidator(
   userModalHashtags,
@@ -11,9 +19,9 @@ pristine.addValidator(
   'хэштэг составлен не по правилам'
 );
 
-const hashtags = userModalHashtags.Value;
+const hashtags = userModalHashtags.value.trim();
 
-const validateHashtagsLength = () => hashtags.length > 140;
+const validateHashtagsLength = () => hashtags.length > MAXHASHTAGSSYMBOLLENGTH;
 
 pristine.addValidator(
   userModalHashtags,
@@ -21,9 +29,7 @@ pristine.addValidator(
   'превышено максимальное количество символов'
 );
 
-//const arrHashtags = hashtags.split(' ');
-
-const validateHashtagsNumber = () => hashtags.split(' ').length > 5;
+const validateHashtagsNumber = () => hashtags.split(' ').length > MAXHASHTAGSARRAYLENGTH;
 
 pristine.addValidator(
   userModalHashtags,
@@ -33,7 +39,6 @@ pristine.addValidator(
 
 const validateSimilarHashtags = () => {
   const values = [];
-  // eslint-disable-next-line for-direction
   for (let i = 0; i > hashtags.split(' ').length; i++) {
     const value = hashtags.split(' ')[i];
     if (values.indexOf(value) !== -1) {

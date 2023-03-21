@@ -6,26 +6,22 @@ const downloadPicture = similarNewMiniatures.querySelector('#upload-file');
 const openModal = similarNewMiniatures.querySelector('.img-upload__overlay');
 const closeModal = similarNewMiniatures.querySelector('.img-upload__cancel');
 const userModalHashtags = openModal.querySelector('.text__hashtags');
-const userModalComment = openModal.querySelector('.text__description');
 
 const onModalKeydown = (event) => {
-  if (userModalComment.focusin()) {
-    if (isEscapeKey(event)) {
-      event.stopPropagation();
-    }
-  } else {
-    if (isEscapeKey(event)) {
+  if (isEscapeKey(event)) {
       event.preventDefault();
       downloadPicture.value = '';
       openModal.classList.add('hidden');
       rollBody.classList.remove('modal-open');
     }
-  }
 };
 
 const openUserModal = () => {
   openModal.classList.remove('hidden');
   rollBody.classList.add('modal-open');
+
+  openModal.addEventListener ('focusin', () => document.removeEventListener('keydown', onModalKeydown));
+  openModal.addEventListener ('focusout', () => document.addEventListener('keydown', onModalKeydown));
 
   document.addEventListener('keydown', onModalKeydown);
 };

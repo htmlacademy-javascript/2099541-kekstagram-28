@@ -17,6 +17,9 @@ const MESSAGE = 'Всё отлично! В целом всё неплохо. Н�
 
 const similarObjectsCount = 25;
 
-export {NAMES, MESSAGE, similarObjectsCount};
+const MAXHASHTAGSSYMBOLLENGTH = 140;
+const MAXHASHTAGSARRAYLENGTH = 5;
+
+export {NAMES, MESSAGE, similarObjectsCount, MAXHASHTAGSSYMBOLLENGTH, MAXHASHTAGSARRAYLENGTH};
 
 

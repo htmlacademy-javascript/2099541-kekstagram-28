@@ -14,13 +14,10 @@ const commentsLoader = bigPicturePreview.querySelector('.comments-loader');
 const bigPictureClose = bigPicturePreview.querySelector('.big-picture__cancel');
 const commentsList = bigPicturePreview.querySelector('.social__comments');
 const comment = bigPicturePreview.querySelector('.social__comment');
-const userComment = bigPicturePreview.querySelector('.social__footer-text');
+//const userComment = bigPicturePreview.querySelector('.social__footer-text');
 
 const onPictureKeydown = (event) => {
   if (isEscapeKey(event)) {
-    if (userComment.focusin()) {
-      event.stopPropagation();
-    }
     event.preventDefault();
     userBigPicture.classList.add('hidden');
     commentsCount.classList.remove('hidden');
@@ -59,6 +56,9 @@ const openUserPicture = (evt) => {
       commentsList.removeChild(comment);
     }
   }
+
+  userBigPicture.addEventListener ('focusin', () => document.removeEventListener('keydown', onPictureKeydown));
+  userBigPicture.addEventListener ('focusout', () => document.addEventListener('keydown', onPictureKeydown));
 
   document.addEventListener('keydown', onPictureKeydown,);
 };
