@@ -9,10 +9,10 @@ const userModalHashtags = openModal.querySelector('.text__hashtags');
 
 const onModalKeydown = (event) => {
   if (isEscapeKey(event)) {
-      event.preventDefault();
-      downloadPicture.value = '';
-      openModal.classList.add('hidden');
-      rollBody.classList.remove('modal-open');
+    event.preventDefault();
+    downloadPicture.value = '';
+    openModal.classList.add('hidden');
+    rollBody.classList.remove('modal-open');
     }
 };
 

@@ -39,7 +39,7 @@ pristine.addValidator(
 
 const validateSimilarHashtags = () => {
   const values = [];
-  for (let i = 0; i > hashtags.split(' ').length; i++) {
+  for (let i = 0; i < hashtags.split(' ').length; i++) {
     const value = hashtags.split(' ')[i];
     if (values.indexOf(value) !== -1) {
       return true;
