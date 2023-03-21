@@ -13,7 +13,7 @@ const onModalKeydown = (event) => {
     downloadPicture.value = '';
     openModal.classList.add('hidden');
     rollBody.classList.remove('modal-open');
-    }
+  }
 };
 
 const openUserModal = () => {
