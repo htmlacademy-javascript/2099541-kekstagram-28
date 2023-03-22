@@ -14,8 +14,9 @@ const commentsLoader = bigPicturePreview.querySelector('.comments-loader');
 const bigPictureClose = bigPicturePreview.querySelector('.big-picture__cancel');
 const commentsList = bigPicturePreview.querySelector('.social__comments');
 const comment = bigPicturePreview.querySelector('.social__comment');
+//const userComment = bigPicturePreview.querySelector('.social__footer-text');
 
-const onDocumentKeydown = (event) => {
+const onPictureKeydown = (event) => {
   if (isEscapeKey(event)) {
     event.preventDefault();
     userBigPicture.classList.add('hidden');
@@ -26,7 +27,7 @@ const onDocumentKeydown = (event) => {
   }
 };
 
-const openUserModal = (evt) => {
+const openUserPicture = (evt) => {
   if (evt.target.closest('.picture')) {
     userBigPicture.classList.remove('hidden');
     commentsCount.classList.add('hidden');
@@ -56,23 +57,28 @@ const openUserModal = (evt) => {
     }
   }
 
-  document.addEventListener('keydown', onDocumentKeydown);
+  userBigPicture.addEventListener ('focusin', () => document.removeEventListener('keydown', onPictureKeydown));
+  userBigPicture.addEventListener ('focusout', () => document.addEventListener('keydown', onPictureKeydown));
+
+  document.addEventListener('keydown', onPictureKeydown,);
 };
 
-const closeUserModal = () => {
+const closeUserPicture = () => {
   userBigPicture.classList.add('hidden');
   commentsCount.classList.remove('hidden');
   commentsLoader.classList.remove('hidden');
   rollBody.classList.remove('modal-open');
   commentsList.appendChild(comment);
 
-  document.removeEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('keydown', onPictureKeydown);
 };
 
 bigPictureOpen.addEventListener('click', (evt) => {
-  openUserModal(evt);
+  openUserPicture(evt);
 });
 
 bigPictureClose.addEventListener('click', () => {
-  closeUserModal();
+  closeUserPicture();
 });
+
+export {rollBody};
