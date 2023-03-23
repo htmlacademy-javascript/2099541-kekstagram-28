@@ -13,23 +13,21 @@ const pristine = new Pristine(userModalForm, {
   errorTextClass: 'img-upload__error'
 }, false);
 
-
-const hashtags = userModalHashtags;
-const userComment = userModalComment;
-
-userModalHashtags.addEventListener('focusin', () =>
-  pristine.addValidator(
-    userModalHashtags,
-    isValidHashtag,
-    'хэштэг составлен не по правилам'
-  )
+pristine.addValidator(
+  userModalHashtags,
+  isValidHashtag,
+  'хэштэг составлен не по правилам'
 );
 
-userModalHashtags.addEventListener('focusout', () =>
-  pristine.reset()
-);
+userModalHashtags.addEventListener('focusin', () => {
+  pristine.reset();
+});
 
-const validateHashtagsLength = () => hashtags.value.trim().length <= MAXHASHTAGSSYMBOLLENGTH;
+userModalHashtags.addEventListener('focusout', () => {
+  pristine.reset();
+});
+
+const validateHashtagsLength = () => userModalHashtags.value.trim().length <= MAXHASHTAGSSYMBOLLENGTH;
 
 pristine.addValidator(
   userModalHashtags,
@@ -37,7 +35,7 @@ pristine.addValidator(
   'превышено максимальное количество символов'
 );
 
-const validateCommentLength = () => userComment.value.trim().length <= MAXTEXTAREALENGTH;
+const validateCommentLength = () => userModalComment.value.trim().length <= MAXTEXTAREALENGTH;
 
 pristine.addValidator(
   userModalComment,
@@ -45,7 +43,7 @@ pristine.addValidator(
   'превышено максимальное количество символов'
 );
 
-const validateHashtagsNumber = () => hashtags.value.trim().split(' ').length < MAXHASHTAGSARRAYLENGTH;
+const validateHashtagsNumber = () => userModalHashtags.value.trim().split(' ').length < MAXHASHTAGSARRAYLENGTH;
 
 pristine.addValidator(
   userModalHashtags,
@@ -55,8 +53,8 @@ pristine.addValidator(
 
 const validateSimilarHashtags = () => {
   const values = [];
-  for (let i = 0; i < hashtags.value.trim().split(' ').length; i++) {
-    const value = hashtags.value.trim().split(' ')[i];
+  for (let i = 0; i < userModalHashtags.value.trim().split(' ').length; i++) {
+    const value = userModalHashtags.value.trim().split(' ')[i];
     if (values.indexOf(value) !== -1) {
       return false;
     }
@@ -70,14 +68,8 @@ pristine.addValidator(
   validateSimilarHashtags,
   'присутствует повторяющйся хэштэг'
 );
-console.log(hashtags.value.length);
+
 userModalForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  console.log(hashtags.value.length);
-  const isValid = pristine.validate();
-  if (isValid) {
-    console.log('Можно отправлять');
-  } else {
-    console.log('Форма невалидна');
-  }
+  pristine.validate();
 });
