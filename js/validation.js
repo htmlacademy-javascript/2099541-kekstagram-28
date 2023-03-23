@@ -13,13 +13,20 @@ const pristine = new Pristine(userModalForm, {
   errorTextClass: 'img-upload__error'
 }, false);
 
+
 const hashtags = userModalHashtags;
 const userComment = userModalComment;
 
-pristine.addValidator(
-  userModalHashtags,
-  isValidHashtag,
-  'хэштэг составлен не по правилам'
+userModalHashtags.addEventListener('focusin', () =>
+  pristine.addValidator(
+    userModalHashtags,
+    isValidHashtag,
+    'хэштэг составлен не по правилам'
+  )
+);
+
+userModalHashtags.addEventListener('focusout', () =>
+  pristine.reset()
 );
 
 const validateHashtagsLength = () => hashtags.value.trim().length <= MAXHASHTAGSSYMBOLLENGTH;
@@ -63,8 +70,14 @@ pristine.addValidator(
   validateSimilarHashtags,
   'присутствует повторяющйся хэштэг'
 );
-
+console.log(hashtags.value.length);
 userModalForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  pristine.validate();
+  console.log(hashtags.value.length);
+  const isValid = pristine.validate();
+  if (isValid) {
+    console.log('Можно отправлять');
+  } else {
+    console.log('Форма невалидна');
+  }
 });
