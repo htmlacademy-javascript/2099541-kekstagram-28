@@ -14,7 +14,6 @@ const commentsLoader = bigPicturePreview.querySelector('.comments-loader');
 const bigPictureClose = bigPicturePreview.querySelector('.big-picture__cancel');
 const commentsList = bigPicturePreview.querySelector('.social__comments');
 const comment = bigPicturePreview.querySelector('.social__comment');
-//const userComment = bigPicturePreview.querySelector('.social__footer-text');
 
 const onPictureKeydown = (event) => {
   if (isEscapeKey(event)) {

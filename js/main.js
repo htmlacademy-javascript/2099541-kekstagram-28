@@ -5,6 +5,8 @@ import {generateNewMiniatures} from './generate-miniatures.js';
 import './open-big-picture.js';
 import './open-user-form.js';
 import './validation.js';
+import './scale.js';
+import './slider-effects.js';
 
 const descriptionObjects = createSimilarObjects(similarObjectsCount, createObject);
 generateNewMiniatures(descriptionObjects);

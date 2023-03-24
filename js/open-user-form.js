@@ -1,6 +1,8 @@
 import {similarNewMiniatures} from './generate-miniatures.js';
 import {rollBody} from './open-big-picture.js';
 import {isEscapeKey} from './functions.js';
+import {resetScale} from './scale.js';
+import {resetEffects} from './slider-effects.js';
 
 const downloadPicture = similarNewMiniatures.querySelector('#upload-file');
 const openModal = similarNewMiniatures.querySelector('.img-upload__overlay');
@@ -31,6 +33,8 @@ const closeUserModal = () => {
   openModal.classList.add('hidden');
   rollBody.classList.remove('modal-open');
   downloadPicture.value = '';
+  resetScale();
+  resetEffects();
 
   document.removeEventListener('keydown', onModalKeydown);
 };
@@ -43,4 +47,4 @@ closeModal.addEventListener('click', () => {
   closeUserModal();
 });
 
-export {userModalHashtags, userModalComment};
+export {userModalHashtags, userModalComment, openModal};
