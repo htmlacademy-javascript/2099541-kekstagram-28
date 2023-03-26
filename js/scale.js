@@ -6,7 +6,7 @@ const scaleBigger = scaleContainer.querySelector('.scale__control--bigger');
 const scaleValue = scaleContainer.querySelector('.scale__control--value');
 const imagePreview = document.querySelector('.img-upload__preview img');
 
-const imageScale = (value) => {
+const scaleImage = (value) => {
   imagePreview.style.transform = `scale(${value / 100})`;
   scaleValue.value = `${value}%`;
 };
@@ -17,7 +17,7 @@ scaleSmaller.addEventListener('click', () => {
   if (nextValue < MINSCALE) {
     nextValue = MINSCALE;
   }
-  imageScale(nextValue);
+  scaleImage(nextValue);
 });
 
 scaleBigger.addEventListener('click', () => {
@@ -26,11 +26,11 @@ scaleBigger.addEventListener('click', () => {
   if (nextValue > MAXSCALE) {
     nextValue = MAXSCALE;
   }
-  imageScale(nextValue);
+  scaleImage(nextValue);
 });
 
 const resetScale = () => {
-  imageScale(DEFAULTSCALE);
+  scaleImage(DEFAULTSCALE);
 };
 
 export {resetScale, imagePreview};

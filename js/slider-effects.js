@@ -1,12 +1,13 @@
 import {EFFECTS} from './data.js';
 import {imagePreview} from './scale.js';
 
+const DEFAULTEFFECT = EFFECTS[0];
+
 const effectsElement = document.querySelector('.effects');
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const effectValue = document.querySelector('.effect-level__value');
 
-const DEFAULTEFFECT = EFFECTS[0];
 let actualEffect = DEFAULTEFFECT;
 
 const isDefault = () => actualEffect === DEFAULTEFFECT;
