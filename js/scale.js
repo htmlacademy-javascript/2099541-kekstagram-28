@@ -1,4 +1,4 @@
-import {SCALESTEP, DEFAULTSCALE, MINSCALE, MAXSCALE} from './data.js';
+import {SCALE_STEP, DEFAULT_SCALE, MIN_SCALE, MAX_SCALE} from './data.js';
 
 const scaleContainer = document.querySelector('.img-upload__scale');
 const scaleSmaller = scaleContainer.querySelector('.scale__control--smaller');
@@ -13,24 +13,24 @@ const imageScale = (value) => {
 
 scaleSmaller.addEventListener('click', () => {
   const currentValue = parseInt(scaleValue.value, 10);
-  let nextValue = currentValue - SCALESTEP;
-  if (nextValue < MINSCALE) {
-    nextValue = MINSCALE;
+  let nextValue = currentValue - SCALE_STEP;
+  if (nextValue < MIN_SCALE) {
+    nextValue = MIN_SCALE;
   }
   imageScale(nextValue);
 });
 
 scaleBigger.addEventListener('click', () => {
   const currentValue = parseInt(scaleValue.value, 10);
-  let nextValue = currentValue + SCALESTEP;
-  if (nextValue > MAXSCALE) {
-    nextValue = MAXSCALE;
+  let nextValue = currentValue + SCALE_STEP;
+  if (nextValue > MAX_SCALE) {
+    nextValue = MAX_SCALE;
   }
   imageScale(nextValue);
 });
 
 const resetScale = () => {
-  imageScale(DEFAULTSCALE);
+  imageScale(DEFAULT_SCALE);
 };
 
 export {resetScale, imagePreview};

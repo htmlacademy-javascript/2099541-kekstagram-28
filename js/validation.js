@@ -1,5 +1,5 @@
 import {userModalHashtags, userModalComment} from './open-user-form.js';
-import {MAXHASHTAGSSYMBOLLENGTH, MAXHASHTAGSARRAYLENGTH, MAXTEXTAREALENGTH} from './data.js';
+import {MAX_HASHTAG_SSYMBOL_LENGTH, MAX_HASHTAGS_ARRAY_LENGTH, MAX_TEXTAREA_LENGTH} from './data.js';
 import {isValidHashtag} from './regexp.js';
 
 const userModalForm = document.querySelector('.img-upload__form');
@@ -27,7 +27,7 @@ userModalHashtags.addEventListener('focusout', () => {
   pristine.reset();
 });
 
-const validateHashtagsLength = () => userModalHashtags.value.trim().length <= MAXHASHTAGSSYMBOLLENGTH;
+const validateHashtagsLength = () => userModalHashtags.value.trim().length <= MAX_HASHTAG_SSYMBOL_LENGTH;
 
 pristine.addValidator(
   userModalHashtags,
@@ -35,7 +35,7 @@ pristine.addValidator(
   'превышено максимальное количество символов'
 );
 
-const validateCommentLength = () => userModalComment.value.trim().length <= MAXTEXTAREALENGTH;
+const validateCommentLength = () => userModalComment.value.trim().length <= MAX_TEXTAREA_LENGTH;
 
 pristine.addValidator(
   userModalComment,
@@ -43,7 +43,7 @@ pristine.addValidator(
   'превышено максимальное количество символов'
 );
 
-const validateHashtagsNumber = () => userModalHashtags.value.trim().split(' ').length < MAXHASHTAGSARRAYLENGTH;
+const validateHashtagsNumber = () => userModalHashtags.value.trim().split(' ').length < MAX_HASHTAGS_ARRAY_LENGTH;
 
 pristine.addValidator(
   userModalHashtags,
