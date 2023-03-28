@@ -37,7 +37,7 @@ const createObject = () => ({
   url: urlIndex(),
   description: 'оцените фотку!)',
   likes: getRandomInteger(15, 200),
-  comments: createSimilarObjects(getRandomInteger(1, 2), createComments),
+  comments: createSimilarObjects(getRandomInteger(1, 15), createComments),
 });
 
 export {createObject};
