@@ -1,6 +1,7 @@
 import {userModalHashtags, userModalComment} from './open-user-form.js';
 import {MAX_HASHTAG_SSYMBOL_LENGTH, MAX_HASHTAGS_ARRAY_LENGTH, MAX_TEXTAREA_LENGTH} from './data.js';
 import {isValidHashtag} from './regexp.js';
+import {showOkMessage, showErrMessage, closeOkMessage, closeErrMessage} from './submit-modal.js';
 
 const userModalForm = document.querySelector('.img-upload__form');
 
@@ -69,7 +70,36 @@ pristine.addValidator(
   'присутствует повторяющйся хэштэг'
 );
 
-userModalForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-});
+const setUserFormSubmit = (onSuccess) => {
+  userModalForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      const formData = new FormData(evt.target);
+
+      fetch('https://28.javascript.pages.academy/kekstagram',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      )
+        .then((response) => {
+          if (response.ok) {
+            onSuccess();
+            showOkMessage();
+            closeOkMessage();
+          } else {
+            showErrMessage();
+            closeErrMessage();
+          }
+        })
+        .catch(() => {
+          showErrMessage();
+          closeErrMessage();
+        });
+    }
+  });
+};
+
+export {setUserFormSubmit};

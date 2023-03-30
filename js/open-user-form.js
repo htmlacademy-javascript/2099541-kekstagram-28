@@ -47,4 +47,4 @@ closeModal.addEventListener('click', () => {
   closeUserModal();
 });
 
-export {userModalHashtags, userModalComment, openModal};
+export {userModalHashtags, userModalComment, openModal, openUserModal, closeUserModal};

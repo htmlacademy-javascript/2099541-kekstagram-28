@@ -1,6 +1,5 @@
 import {similarNewMiniatures} from './generate-miniatures.js';
 import {isEscapeKey} from './functions.js';
-import {descriptionObjects} from './main.js';
 import {COMMENTS_PER_PORTION} from './data.js';
 
 const userBigPicture = document.querySelector('.big-picture');
@@ -58,25 +57,28 @@ const renderComments = () => {
   commentsCount.innerHTML = `${commentsShown} из <span class="comments-count" id="comments-count">${comments.length}</span> комментариев`;
 };
 
-const openUserPicture = (evt) => {
-  if (evt.target.closest('.picture')) {
-    userBigPicture.classList.remove('hidden');
-    rollBody.classList.add('modal-open');
-    const target = evt.target.closest('.picture');
-    const currentData = descriptionObjects.find((item) => item.id === Number(target.dataset.id));
-    newBigPicture.src = currentData.url;
-    newBigPicture.alt = currentData.description;
-    newLikesCount.textContent = currentData.likes;
-    newCommentsCount.textContent = currentData.comments.length;
-    comments = currentData.comments;
-    commentsShown = 0;
-    renderComments();
-  }
+const openUserPicture = (arr) => {
+  bigPictureOpen.addEventListener('click', (evt) => {
+    if (evt.target.closest('.picture')) {
+      userBigPicture.classList.remove('hidden');
+      rollBody.classList.add('modal-open');
+      const target = evt.target.closest('.picture');
+      const currentData = arr.find((item) => item.id === Number(target.dataset.id));
+      newBigPicture.src = currentData.url;
+      newBigPicture.alt = currentData.description;
+      newLikesCount.textContent = currentData.likes;
+      newCommentsCount.textContent = currentData.comments.length;
+      comments = currentData.comments;
+
+      commentsShown = 0;
+      renderComments();
+    }
+  });
 
   userBigPicture.addEventListener ('focusin', () => document.removeEventListener('keydown', onPictureKeydown));
   userBigPicture.addEventListener ('focusout', () => document.addEventListener('keydown', onPictureKeydown));
 
-  document.addEventListener('keydown', onPictureKeydown,);
+  document.addEventListener('keydown', onPictureKeydown);
 };
 
 const closeUserPicture = () => {
@@ -88,12 +90,12 @@ const closeUserPicture = () => {
 
 addCommentsButton.addEventListener('click', renderComments);
 
-bigPictureOpen.addEventListener('click', (evt) => {
-  openUserPicture(evt);
+bigPictureOpen.addEventListener('click', () => {
+  openUserPicture();
 });
 
 bigPictureClose.addEventListener('click', () => {
   closeUserPicture();
 });
 
-export {rollBody};
+export {rollBody, openUserPicture};
