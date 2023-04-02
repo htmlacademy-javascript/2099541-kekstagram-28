@@ -3,10 +3,10 @@ import {userModalHashtags} from './open-user-form.js';
 const hashtagRules = /^#[a-zа-яё0-9]{1,19}$/i;
 
 const isValidHashtag = (tag) => {
-  if (userModalHashtags.value.length === 0) {
+  if (userModalHashtags.value === '') {
     return true;
   } else {
-    hashtagRules.test(tag);
+    return hashtagRules.test(tag);
   }
 };
 
