@@ -1,8 +1,13 @@
 import {userModalHashtags, userModalComment} from './open-user-form.js';
 import {MAX_HASHTAG_SSYMBOL_LENGTH, MAX_HASHTAGS_ARRAY_LENGTH, MAX_TEXTAREA_LENGTH} from './data.js';
 import {isValidHashtag} from './regexp.js';
+import {showOkMessage} from './submit-modal-ok.js';
+import {showErrMessage} from './submit-modal-err.js';
+import {showAlert} from './alerts.js';
+import {sendData} from './api.js';
 
 const userModalForm = document.querySelector('.img-upload__form');
+const submitBtn = document.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(userModalForm, {
   classTo: 'img-upload__field-wrapper',
@@ -69,7 +74,39 @@ pristine.addValidator(
   'присутствует повторяющйся хэштэг'
 );
 
-userModalForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-});
+const SubmitButtonText = {
+  IDLE: 'Сохранить',
+  SENDING: 'Сохраняю...'
+};
+
+const blockSubmitBtn = () => {
+  submitBtn.disabled = true;
+  submitBtn.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitBtn = () => {
+  submitBtn.disabled = false;
+  submitBtn.textContent = SubmitButtonText.IDLE;
+};
+
+const setUserFormSubmit = (onSuccess) => {
+  userModalForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitBtn();
+      sendData(new FormData(evt.target))
+        .then(onSuccess, showOkMessage())
+        .catch(
+          (err) => {
+            showAlert(err.message);
+            showErrMessage();
+          }
+        )
+        .finally(unblockSubmitBtn);
+    }
+  });
+};
+
+export {setUserFormSubmit};
