@@ -6,10 +6,19 @@ import './scale.js';
 import './slider-effects.js';
 import {getData} from './api.js';
 import {showAlert} from './alerts.js';
+import {showSorting, reGenerateMiniatures, setBtnClick} from './sort.js';
+import {debounce} from './functions.js';
+import {TYME_OUT_OF_DELAY} from './data.js';
+
 
 getData()
   .then((miniatures) => {
     generateNewMiniatures(miniatures);
+    showSorting();
+    //reGenerateMiniatures(miniatures);
+    setBtnClick(debounce((btn) => {
+      reGenerateMiniatures(miniatures, btn);
+    }, TYME_OUT_OF_DELAY));
     openUserPicture(miniatures);
   })
   .catch(
