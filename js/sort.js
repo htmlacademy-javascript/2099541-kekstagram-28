@@ -1,12 +1,13 @@
-import {compareRandom, changeClass} from './functions.js';
+import {compareRandom} from './functions.js';
 import {MAX_RANDOM_MINIATURES} from './data.js';
 import {generateNewMiniatures} from './generate-miniatures.js';
 
 const sortContainer = document.querySelector('.img-filters');
-//const defaultSort = document.querySelector('#filter-default');
-const btnSortForm = document.querySelector('.img-filters__form').children;
-//const randomtSort = document.querySelector('#filter-random');
-//const discussSort = document.querySelector('#filter-discussed');
+const defaultSort = document.querySelector('#filter-default');
+const btnSortForm = document.querySelector('.img-filters__form');
+const buttons = btnSortForm.children;
+const randomtSort = document.querySelector('#filter-random');
+const discussSort = document.querySelector('#filter-discussed');
 
 const activeSortClass = 'img-filters__button--active';
 
@@ -30,48 +31,55 @@ const sortRandomMiniatures = (arr) => {
 };
 
 const sortDiscussMiniatures = (arr) => {
-  const discussMiniatures = arr.slice().sort((arrItemA, arrItemB) => {
-    return arrItemB.comments.length - arrItemA.comments.length;
-  });
+  const discussMiniatures = arr.slice().sort((arrItemA, arrItemB) => arrItemB.comments.length - arrItemA.comments.length);
 
   return discussMiniatures;
 };
 
 const generateDefaultMiniatures = (arr) => {
-    deletMiniatures();
-    generateNewMiniatures(arr);
+  deletMiniatures();
+  generateNewMiniatures(arr);
 };
 
 const generateRandomMiniatures = (arr) => {
-      deletMiniatures();
-      generateNewMiniatures(sortRandomMiniatures(arr));
+  deletMiniatures();
+  generateNewMiniatures(sortRandomMiniatures(arr));
 };
 
 const generateDiscussMiniatures = (arr) => {
-    deletMiniatures();
-    generateNewMiniatures(sortDiscussMiniatures(arr));
+  deletMiniatures();
+  generateNewMiniatures(sortDiscussMiniatures(arr));
 };
 
 const setBtnClick = (cb) => {
-  for (const btn of btnSortForm) {
+  for (const btn of buttons) {
     btn.addEventListener('click', () => {
-      changeClass(btn, activeSortClass, btnSortForm);
       cb(btn);
-  });
+    });
   }
 };
 
 const reGenerateMiniatures = (arr, btn) => {
   if (btn.id === 'filter-random') {
     generateRandomMiniatures(arr);
+    randomtSort.classList.add(activeSortClass);
+    defaultSort.classList.remove(activeSortClass);
+    discussSort.classList.remove(activeSortClass);
   }
 
   if (btn.id === 'filter-discussed') {
     generateDiscussMiniatures(arr);
+    discussSort.classList.add(activeSortClass);
+    defaultSort.classList.remove(activeSortClass);
+    randomtSort.classList.remove(activeSortClass);
   }
 
-  generateDefaultMiniatures(arr);
+  if (btn.id === 'filter-default') {
+    generateDefaultMiniatures(arr);
+    defaultSort.classList.add(activeSortClass);
+    discussSort.classList.remove(activeSortClass);
+    randomtSort.classList.remove(activeSortClass);
+  }
 };
-
 
 export {showSorting, reGenerateMiniatures, setBtnClick};

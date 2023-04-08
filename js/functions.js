@@ -26,9 +26,7 @@ const getRandomInteger = (min, max) => {
   return Math.floor(result);
 };
 
-const compareRandom = (a, b) => {
-  return Math.random() - 0.5;
-}
+const compareRandom = () => Math.random() - 0.5;
 
 const createRandomUniqId = (min, max) => {
   const previousValues = [];
@@ -66,18 +64,18 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
-const changeClass = (btn, btnClass, list) => {
+/* const changeClass = (btn, btnClass, list) => {
   for (const element of list) {
     if (element.classList.contains(btnClass)) {
       element.classList.remove(btnClass);
     }
   }
   btn.classList.add(btnClass);
-};
+}; */
 
 //getStringLength();
 //getMatchPalindrome();
 //getNumber();
 //getNewString();
 
-export {getRandomInteger, compareRandom, createRandomUniqId, showArrayRand, createSimilarObjects, isEscapeKey, validateInputLength, debounce, changeClass};
+export {getRandomInteger, compareRandom, createRandomUniqId, showArrayRand, createSimilarObjects, isEscapeKey, validateInputLength, debounce};
