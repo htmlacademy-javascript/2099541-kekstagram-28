@@ -26,6 +26,10 @@ const getRandomInteger = (min, max) => {
   return Math.floor(result);
 };
 
+const compareRandom = (a, b) => {
+  return Math.random() - 0.5;
+}
+
 const createRandomUniqId = (min, max) => {
   const previousValues = [];
 
@@ -53,9 +57,27 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const validateInputLength = (input, number) => input.value.trim().length <= number;
 
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+const changeClass = (btn, btnClass, list) => {
+  for (const element of list) {
+    if (element.classList.contains(btnClass)) {
+      element.classList.remove(btnClass);
+    }
+  }
+  btn.classList.add(btnClass);
+};
+
 //getStringLength();
 //getMatchPalindrome();
 //getNumber();
 //getNewString();
 
-export {getRandomInteger, createRandomUniqId, showArrayRand, createSimilarObjects, isEscapeKey, validateInputLength};
+export {getRandomInteger, compareRandom, createRandomUniqId, showArrayRand, createSimilarObjects, isEscapeKey, validateInputLength, debounce, changeClass};
