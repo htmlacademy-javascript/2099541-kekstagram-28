@@ -3,6 +3,7 @@ import {rollBody} from './open-big-picture.js';
 import {isEscapeKey} from './functions.js';
 import {resetScale} from './scale.js';
 import {resetEffects} from './slider-effects.js';
+import {showPreviewImg} from './load-img.js';
 
 const downloadPicture = similarNewMiniatures.querySelector('#upload-file');
 const openModal = similarNewMiniatures.querySelector('.img-upload__overlay');
@@ -41,10 +42,11 @@ const closeUserModal = () => {
 
 downloadPicture.addEventListener('input', () => {
   openUserModal();
+  showPreviewImg();
 });
 
 closeModal.addEventListener('click', () => {
   closeUserModal();
 });
 
-export {userModalHashtags, userModalComment, openModal, openUserModal, closeUserModal};
+export {userModalHashtags, userModalComment, openUserModal, closeUserModal};

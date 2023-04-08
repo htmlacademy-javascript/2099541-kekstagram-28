@@ -15,7 +15,6 @@ getData()
   .then((miniatures) => {
     generateNewMiniatures(miniatures);
     showSorting();
-    //reGenerateMiniatures(miniatures);
     setBtnClick(debounce((btn) => {
       reGenerateMiniatures(miniatures, btn);
     }, TYME_OUT_OF_DELAY));

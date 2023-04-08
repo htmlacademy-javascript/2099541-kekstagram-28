@@ -6,7 +6,7 @@ const sortContainer = document.querySelector('.img-filters');
 const defaultSort = document.querySelector('#filter-default');
 const btnSortForm = document.querySelector('.img-filters__form');
 const buttons = btnSortForm.children;
-const randomtSort = document.querySelector('#filter-random');
+const randomSort = document.querySelector('#filter-random');
 const discussSort = document.querySelector('#filter-discussed');
 
 const activeSortClass = 'img-filters__button--active';
@@ -15,7 +15,7 @@ const showSorting = () => {
   sortContainer.classList.remove('img-filters--inactive');
 };
 
-const deletMiniatures = () => {
+const deleteMiniatures = () => {
   const personalMiniatures = document.querySelectorAll('.picture');
   if (personalMiniatures) {
     personalMiniatures.forEach((personalMiniature) => {
@@ -30,24 +30,20 @@ const sortRandomMiniatures = (arr) => {
   return newRandomMiniatures.slice(0, MAX_RANDOM_MINIATURES);
 };
 
-const sortDiscussMiniatures = (arr) => {
-  const discussMiniatures = arr.slice().sort((arrItemA, arrItemB) => arrItemB.comments.length - arrItemA.comments.length);
-
-  return discussMiniatures;
-};
+const sortDiscussMiniatures = (arr) => arr.slice().sort((arrItemA, arrItemB) => arrItemB.comments.length - arrItemA.comments.length);
 
 const generateDefaultMiniatures = (arr) => {
-  deletMiniatures();
+  deleteMiniatures();
   generateNewMiniatures(arr);
 };
 
 const generateRandomMiniatures = (arr) => {
-  deletMiniatures();
+  deleteMiniatures();
   generateNewMiniatures(sortRandomMiniatures(arr));
 };
 
 const generateDiscussMiniatures = (arr) => {
-  deletMiniatures();
+  deleteMiniatures();
   generateNewMiniatures(sortDiscussMiniatures(arr));
 };
 
@@ -62,7 +58,7 @@ const setBtnClick = (cb) => {
 const reGenerateMiniatures = (arr, btn) => {
   if (btn.id === 'filter-random') {
     generateRandomMiniatures(arr);
-    randomtSort.classList.add(activeSortClass);
+    randomSort.classList.add(activeSortClass);
     defaultSort.classList.remove(activeSortClass);
     discussSort.classList.remove(activeSortClass);
   }
@@ -71,14 +67,14 @@ const reGenerateMiniatures = (arr, btn) => {
     generateDiscussMiniatures(arr);
     discussSort.classList.add(activeSortClass);
     defaultSort.classList.remove(activeSortClass);
-    randomtSort.classList.remove(activeSortClass);
+    randomSort.classList.remove(activeSortClass);
   }
 
   if (btn.id === 'filter-default') {
     generateDefaultMiniatures(arr);
     defaultSort.classList.add(activeSortClass);
     discussSort.classList.remove(activeSortClass);
-    randomtSort.classList.remove(activeSortClass);
+    randomSort.classList.remove(activeSortClass);
   }
 };
 
