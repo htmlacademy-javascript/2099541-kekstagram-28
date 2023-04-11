@@ -1,5 +1,5 @@
 import {compareRandom} from './functions.js';
-import {MAX_RANDOM_MINIATURES} from './data.js';
+import {MAX_RANDOM_MINIATURES, Filter} from './data.js';
 import {generateNewMiniatures} from './generate-miniatures.js';
 
 const sortContainer = document.querySelector('.img-filters');
@@ -56,21 +56,21 @@ const setBtnClick = (cb) => {
 };
 
 const reGenerateMiniatures = (arr, btn) => {
-  if (btn.id === 'filter-random') {
+  if (btn.id === Filter.RANDOM) {
     generateRandomMiniatures(arr);
     randomSort.classList.add(activeSortClass);
     defaultSort.classList.remove(activeSortClass);
     discussSort.classList.remove(activeSortClass);
   }
 
-  if (btn.id === 'filter-discussed') {
+  if (btn.id === Filter.DISCUSSED) {
     generateDiscussMiniatures(arr);
     discussSort.classList.add(activeSortClass);
     defaultSort.classList.remove(activeSortClass);
     randomSort.classList.remove(activeSortClass);
   }
 
-  if (btn.id === 'filter-default') {
+  if (btn.id === Filter.DEFAULT) {
     generateDefaultMiniatures(arr);
     defaultSort.classList.add(activeSortClass);
     discussSort.classList.remove(activeSortClass);

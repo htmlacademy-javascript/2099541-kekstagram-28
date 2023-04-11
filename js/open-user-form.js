@@ -11,10 +11,20 @@ const closeModal = similarNewMiniatures.querySelector('.img-upload__cancel');
 const userModalHashtags = openModal.querySelector('.text__hashtags');
 const userModalComment = openModal.querySelector('.text__description');
 
+const clearErrMessage = () => {
+  const errTextMessages = document.querySelectorAll('.pristine-error');
+  if (errTextMessages) {
+    errTextMessages.forEach((errTextMessage) => {
+      errTextMessage.textContent = '';
+    });
+  }
+};
+
 const onModalKeydown = (event) => {
   if (isEscapeKey(event)) {
     event.preventDefault();
     downloadPicture.value = '';
+    clearErrMessage();
     openModal.classList.add('hidden');
     rollBody.classList.remove('modal-open');
   }
@@ -36,6 +46,7 @@ const closeUserModal = () => {
   downloadPicture.value = '';
   resetScale();
   resetEffects();
+  clearErrMessage();
 
   document.removeEventListener('keydown', onModalKeydown);
 };
