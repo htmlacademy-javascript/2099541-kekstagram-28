@@ -1,7 +1,7 @@
-import {EFFECTS} from './data.js';
+import {defaultFilter, chromeFilter, sepiaFilter, marvinFilter, phobosFilter, heatFilter} from './data.js';
 import {imagePreview} from './scale.js';
 
-const DEFAULT_EFFECT = EFFECTS[0];
+const DEFAULT_EFFECT = defaultFilter;
 
 const effectsElement = document.querySelector('.effects');
 const sliderElement = document.querySelector('.effect-level__slider');
@@ -38,8 +38,38 @@ const updateSlider = () => {
 };
 
 const onEffectsChange = (evt) => {
-  if (evt.target.classList.contains('effects__radio')) {
-    actualEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
+  if (evt.target.closest('#effect-chrome')) {
+    actualEffect = chromeFilter;
+    imagePreview.className = `effects__preview--${actualEffect.name}`;
+    updateSlider();
+  }
+
+  if (evt.target.closest('#effect-sepia')) {
+    actualEffect = sepiaFilter;
+    imagePreview.className = `effects__preview--${actualEffect.name}`;
+    updateSlider();
+  }
+
+  if (evt.target.closest('#effect-marvin')) {
+    actualEffect = marvinFilter;
+    imagePreview.className = `effects__preview--${actualEffect.name}`;
+    updateSlider();
+  }
+
+  if (evt.target.closest('#effect-phobos')) {
+    actualEffect = phobosFilter;
+    imagePreview.className = `effects__preview--${actualEffect.name}`;
+    updateSlider();
+  }
+
+  if (evt.target.closest('#effect-heat')) {
+    actualEffect = heatFilter;
+    imagePreview.className = `effects__preview--${actualEffect.name}`;
+    updateSlider();
+  }
+
+  if (evt.target.closest('#effect-none')) {
+    actualEffect = defaultFilter;
     imagePreview.className = `effects__preview--${actualEffect.name}`;
     updateSlider();
   }

@@ -1,12 +1,10 @@
+import {showOkMessage} from './submit-modal-ok.js';
+import {showErrMessage} from './submit-modal-err.js';
+
 const BASE_URL = 'https://28.javascript.pages.academy/kekstagram';
 const Route = {
   GET_DATA: '/data',
   SEND_DATA: '/',
-};
-
-const Method = {
-  GET: 'GET',
-  POST: 'POST',
 };
 
 const ErrorText = {
@@ -14,9 +12,9 @@ const ErrorText = {
   SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
 };
 
-const load = (route, errorText, method = Method.GET, body = null) =>
+const getData = () =>
   fetch(
-    `${BASE_URL}${route}`, {method, body})
+    `${BASE_URL}${Route.GET_DATA}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error();
@@ -24,11 +22,25 @@ const load = (route, errorText, method = Method.GET, body = null) =>
       return response.json();
     })
     .catch(() => {
-      throw new Error(errorText);
+      throw new Error(ErrorText.GET_DATA);
     });
 
-const getData = () => load(Route.GET_DATA, ErrorText.GET_DATA);
-
-const sendData = (body) => load(Route.SEND_DATA, ErrorText.SEND_DATA, Method.POST, body);
+const sendData = (body) =>
+  fetch(
+    `${BASE_URL}${Route.SEND_DATA}`,
+    {
+      method: 'POST',
+      body,
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(ErrorText.SEND_DATA);
+      }
+      showOkMessage();
+      return response.json();
+    })
+    .catch(() => {
+      showErrMessage();
+    });
 
 export {getData, sendData};
