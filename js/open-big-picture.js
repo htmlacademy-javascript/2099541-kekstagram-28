@@ -36,7 +36,7 @@ const createComment = ((commentData) => {
   return comment;
 });
 
-const onRenderComments = () => {
+const onLoadCommentsClick = () => {
   commentsShown += COMMENTS_PER_PORTION;
 
   if (commentsShown >= comments.length) {
@@ -71,7 +71,7 @@ const openUserPicture = (arr) => {
       comments = currentData.comments;
 
       commentsShown = 0;
-      onRenderComments();
+      onLoadCommentsClick();
     }
   });
 
@@ -88,7 +88,7 @@ const closeUserPicture = () => {
   document.removeEventListener('keydown', onPictureKeydown);
 };
 
-addCommentsButton.addEventListener('click', onRenderComments);
+addCommentsButton.addEventListener('click', onLoadCommentsClick);
 
 bigPictureOpen.addEventListener('click', () => {
   openUserPicture();
